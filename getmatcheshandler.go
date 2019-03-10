@@ -17,7 +17,6 @@ func (h *Handler) GetMatchesHandler(w http.ResponseWriter, r *http.Request) {
 
 	//ensure all requisite json components are found
 	if err := h.VerifyBody(requestBody, "pin", "uid"); err != nil {
-		fmt.Fprintln(w, err.Error())
 		return
 	}
 
@@ -28,7 +27,6 @@ func (h *Handler) GetMatchesHandler(w http.ResponseWriter, r *http.Request) {
 
 	//ensure pin is verified for user authentication
 	if err := h.VerifyPin(uid, pin); err != nil {
-		fmt.Fprintln(w, err.Error())
 		return
 	}
 
@@ -45,8 +43,8 @@ func (h *Handler) GetMatchesHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Fprint(w, len(matches))
-
+	fmt.Fprint(w, "{")
 	json.NewEncoder(w).Encode(&matches)
+	fmt.Fprint(w, "}")
 	w.WriteHeader(http.StatusOK)
 }

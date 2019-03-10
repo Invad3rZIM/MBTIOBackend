@@ -41,6 +41,7 @@ func main() {
 
 	http.HandleFunc("/messages/get", h.GetMessagesHandler)
 	http.HandleFunc("/messages/send", h.SendMessageHandler)
+	http.HandleFunc("/messages/get/fake", h.GetFakeMessagesHandler)
 
 	http.HandleFunc("/twilio/send", h.SendTwilioHandler)
 	http.HandleFunc("/twilio/verify", h.VerifyTwilioHandler)
