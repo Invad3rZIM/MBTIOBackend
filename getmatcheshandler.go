@@ -43,8 +43,13 @@ func (h *Handler) GetMatchesHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Fprint(w, "{")
-	json.NewEncoder(w).Encode(&matches)
-	fmt.Fprint(w, "}")
+	ww := Wrapper{M: matches}
+
+	json.NewEncoder(w).Encode(&ww)
+
 	w.WriteHeader(http.StatusOK)
+}
+
+type Wrapper struct {
+	M []*User
 }
